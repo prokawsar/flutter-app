@@ -2,52 +2,27 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.red,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Flutter App'),
-          backgroundColor: Colors.deepPurpleAccent,
+          title: const Text('Dice'),
+          backgroundColor: Colors.red,
         ),
-        body: SafeArea(
+        body: Center(
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 100,
-                color: Colors.red,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset('assets/images/dice1.png'),
+                ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: AssetImage('assets/images/photo.jpg'),
-                  ),
-                  Text(
-                    'FLUTTER DEVELOPER',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Roboto',
-                        fontSize: 16),
-                  ),
-                  // Card(
-                  //   margin:
-                  //       EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  //   color: Colors.white,
-                  //   child: ListTile(
-                  //     leading: Icon(
-                  //       Icons.phone,
-                  //       color: Colors.blue,
-                  //     ),
-                  //     title: Text('01915-983757'),
-                  //   ),
-                  // ),
-                ],
-              ),
-              Container(
-                width: 100,
-                color: Colors.blue,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset('assets/images/dice2.png'),
+                ),
               ),
             ],
           ),
@@ -55,21 +30,17 @@ void main() => runApp(MaterialApp(
       ),
     ));
 
-// children: [
-// Container(
-// width: 150,
-// height: 200,
-// child: const Image(
-// image: NetworkImage(
-// 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-// ),
-// ),
-// Container(
-// width: 150,
-// height: 200,
-// child: const Image(
-// image: NetworkImage(
-// 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-// ),
-// ),
-// ],
+class DicePage extends StatelessWidget {
+  const DicePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: const [
+        Image(
+          image: AssetImage('assets/images/dice2.png'),
+        ),
+      ],
+    );
+  }
+}
