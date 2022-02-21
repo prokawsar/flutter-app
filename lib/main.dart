@@ -46,7 +46,6 @@ class _StoryPageState extends State<StoryPage> {
                 child: Center(
                   child: Text(
                     storyBrain.getStory(),
-                    // 'Story text will go here.',
                     style: const TextStyle(
                       fontSize: 25.0,
                     ),
@@ -64,7 +63,6 @@ class _StoryPageState extends State<StoryPage> {
                   color: Colors.red,
                   child: Text(
                     storyBrain.getChoice1(),
-                    // 'Choice 1',
                     style: const TextStyle(
                       fontSize: 20.0,
                     ),
@@ -74,22 +72,22 @@ class _StoryPageState extends State<StoryPage> {
               const SizedBox(
                 height: 20.0,
               ),
-              Expanded(
-                flex: 2,
-                //TODO: Step 26 - Use a Flutter Visibility Widget to wrap this FlatButton.
-                //TODO: Step 28 - Set the "visible" property of the Visibility Widget to equal the output from the buttonShouldBeVisible() method in the storyBrain.
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      storyBrain.nextStory(2);
-                    });
-                  },
-                  color: Colors.blue,
-                  child: Text(
-                    storyBrain.getChoice2(),
-                    // 'Choice 2',
-                    style: const TextStyle(
-                      fontSize: 20.0,
+              Visibility(
+                visible: storyBrain.buttonShouldBeVisible(),
+                child: Expanded(
+                  flex: 2,
+                  child: FlatButton(
+                    onPressed: () {
+                      setState(() {
+                        storyBrain.nextStory(2);
+                      });
+                    },
+                    color: Colors.blue,
+                    child: Text(
+                      storyBrain.getChoice2(),
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
                 ),
