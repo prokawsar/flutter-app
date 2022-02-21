@@ -1,75 +1,107 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/story_brain.dart';
 
-void main() => runApp(MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.teal,
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Flutter App'),
-          backgroundColor: Colors.deepPurpleAccent,
+void main() => runApp(const Destini());
+
+class Destini extends StatelessWidget {
+  const Destini({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: StoryPage(),
+    );
+  }
+}
+
+StoryBrain storyBrain = StoryBrain();
+
+class StoryPage extends StatefulWidget {
+  const StoryPage({Key? key}) : super(key: key);
+
+  @override
+  _StoryPageState createState() => _StoryPageState();
+}
+
+class _StoryPageState extends State<StoryPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background.png'),
+            fit: BoxFit.cover,
+          ),
         ),
-        body: SafeArea(
-          child: Row(
+        padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
+        constraints: const BoxConstraints.expand(),
+        child: SafeArea(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 100,
-                color: Colors.red,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: AssetImage('assets/images/photo.jpg'),
+            children: <Widget>[
+              Expanded(
+                flex: 12,
+                child: Center(
+                  child: Text(
+                    storyBrain.getStory(),
+                    // 'Story text will go here.',
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                    ),
                   ),
-                  Text(
-                    'FLUTTER DEVELOPER',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Roboto',
-                        fontSize: 16),
-                  ),
-                  // Card(
-                  //   margin:
-                  //       EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  //   color: Colors.white,
-                  //   child: ListTile(
-                  //     leading: Icon(
-                  //       Icons.phone,
-                  //       color: Colors.blue,
-                  //     ),
-                  //     title: Text('01915-983757'),
-                  //   ),
-                  // ),
-                ],
+                ),
               ),
-              Container(
-                width: 100,
-                color: Colors.blue,
+              Expanded(
+                flex: 2,
+                child: FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      storyBrain.nextStory(1);
+                    });
+                  },
+                  color: Colors.red,
+                  child: Text(
+                    storyBrain.getChoice1(),
+                    // 'Choice 1',
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                flex: 2,
+                //TODO: Step 26 - Use a Flutter Visibility Widget to wrap this FlatButton.
+                //TODO: Step 28 - Set the "visible" property of the Visibility Widget to equal the output from the buttonShouldBeVisible() method in the storyBrain.
+                child: FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      storyBrain.nextStory(2);
+                    });
+                  },
+                  color: Colors.blue,
+                  child: Text(
+                    storyBrain.getChoice2(),
+                    // 'Choice 2',
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
         ),
       ),
-    ));
+    );
+  }
+}
 
-// children: [
-// Container(
-// width: 150,
-// height: 200,
-// child: const Image(
-// image: NetworkImage(
-// 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-// ),
-// ),
-// Container(
-// width: 150,
-// height: 200,
-// child: const Image(
-// image: NetworkImage(
-// 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-// ),
-// ),
-// ],
+//TODO: Step 24 - Run the app and try to figure out what code you need to add to this file to make the story change when you press on the choice buttons.
+
+//TODO: Step 29 - Run the app and test it against the Story Outline to make sure you've completed all the steps. The code for the completed app can be found here: https://github.com/londonappbrewery/destini-challenge-completed/
